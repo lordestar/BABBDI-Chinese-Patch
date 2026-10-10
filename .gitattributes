@@ -1,0 +1,21 @@
+# 默认按文本处理
+* text=auto
+
+# 批处理文件是 GBK 编码 + CRLF 行尾（为了在中文 Windows 控制台正常显示中文），
+# 必须按二进制处理，否则会被 git 改写编码/行尾，导致中文乱码或无法执行
+*.bat -text -diff
+
+# PowerShell 脚本：UTF-8 with BOM + CRLF
+# 注意：BOM 是文件内容的一部分（Windows PowerShell 5.1 靠 BOM 才能正确读中文），
+# 所以只能用 text/eol，绝不能用 working-tree-encoding（它会把 BOM 弄丢）
+*.ps1 text eol=crlf
+
+# 二进制文件
+*.dll binary
+*.exe binary
+*.png binary
+*.jpg binary
+*.zip binary
+
+# 文档
+*.md text eol=lf
