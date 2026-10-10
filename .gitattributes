@@ -10,6 +10,12 @@
 # 所以只能用 text/eol，绝不能用 working-tree-encoding（它会把 BOM 弄丢）
 *.ps1 text eol=crlf
 
+# payload/ 是要原样复制进游戏目录的安装内容。
+# 不同机器上 git 的 core.autocrlf 设置不同，会让检出的行尾不一致，
+# 因此这里一律按二进制处理，保证任何环境下取到的都是完全相同的字节。
+# （词典的真正源文件是 source/tools/translations.py，由脚本生成 payload 里的词典）
+payload/** -text -diff
+
 # 二进制文件
 *.dll binary
 *.exe binary
